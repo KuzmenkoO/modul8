@@ -33,7 +33,7 @@ class MyQueue<T> {
     public void remove(int index) {
         if (index <= size && index >= 0) {
             element[index] = null;
-            for (int i = 0; i < this.size-1; i++) {
+            for (int i = 0; i < this.size - 1; i++) {
                 if (element[i] == null) {
                     element[i] = element[i + 1];
                     element[i + 1] = null;
@@ -48,14 +48,14 @@ class MyQueue<T> {
         this.size = 0;
     }
 
-    public T peek(){
+    public T peek() {
         return (T) element[0].toString();
     }
 
-    public T pull(){
+    public T pull() {
         T firstElement = element[0];
         remove(0);
-        return (T)firstElement.toString();
+        return (T) firstElement.toString();
     }
 
     @Override
