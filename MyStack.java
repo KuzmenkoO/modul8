@@ -3,9 +3,9 @@ package homeWork8;
 import java.util.Arrays;
 
 public class MyStack<E> {
+    private final int capacity = 1;
     private E[] element;
     private int size;
-    private final int capacity = 1;
 
     public MyStack() {
         this.element = (E[]) new Object[capacity];
@@ -70,7 +70,7 @@ public class MyStack<E> {
     }
 }
 
-class Test {
+class TestMyStack {
     public static void main(String[] args) {
         MyStack<Integer> stack = new MyStack<>();
         System.out.println(stack);
@@ -101,7 +101,5 @@ class Test {
         System.out.println(stack);
         System.out.println(stack.clear());
         System.out.println(stack);
-
-
     }
 }

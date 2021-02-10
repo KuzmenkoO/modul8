@@ -1,15 +1,16 @@
 package homeWork8;
+
 import java.util.Arrays;
 
 class MyArrayList<T> {
     public T[] elementData = (T[]) new Object[10];
     public int size = 0;
 
-    public void add(Object value) {
+    public void add(T value) {
         if (size < elementData.length) {
             for (int i = 0; i < elementData.length; i++) {
                 if (elementData[i] == null) {
-                    elementData[i] = (T) value;
+                    elementData[i] = value;
                     break;
                 }
             }
@@ -30,10 +31,10 @@ class MyArrayList<T> {
     }
 
     public void remove(int index) {
-        if (index >= 0 && index <= size) {
+        if (index >= 0 && index < elementData.length) {
             elementData[index] = null;
-            for (int i = 0; i < this.size; i++) {
-                if (elementData[i] == null) {
+            for (int i = index; i < this.size; i++) {
+                if (elementData[i] == null && i < elementData.length - 1) {
                     elementData[i] = elementData[i + 1];
                     elementData[i + 1] = null;
                 }
@@ -42,42 +43,41 @@ class MyArrayList<T> {
         }
     }
 
-    public T get(int index){
-        if (index<0 || index>size){
+    public T get(int index) {
+        if (index < 0 || index > size) {
             return null;
         }
-        return elementData[index-1];
+        return elementData[index - 1];
     }
 
-    public void clear(){
+    public void clear() {
         this.elementData = (T[]) new Object[10];
         this.size = 0;
     }
 
     @Override
     public String toString() {
+        elementData = Arrays.copyOf(elementData, size);
         return Arrays.toString(elementData);
     }
 }
 
-class Main {
+class TestMyArrayList {
     public static void main(String[] args) {
         MyArrayList<Integer> myArrayList = new MyArrayList<>();
-
         for (int i = 1; i <= 5; i++) {
-            myArrayList.add("ff");
+            myArrayList.add(i);
         }
-
-        System.out.println((myArrayList) + "  " + myArrayList.size);
+        System.out.println((myArrayList) + "  " + myArrayList.size());
         for (int i = 6; i <= 10; i++) {
-            myArrayList.add(55);
+            myArrayList.add(i);
         }
-        myArrayList.add(56);
-        System.out.println(myArrayList + "  " + myArrayList.size);
+        myArrayList.add(100);
+        System.out.println(myArrayList + "  " + myArrayList.size());
         for (int i = 11; i <= 15; i++) {
-            myArrayList.add("oo");
+            myArrayList.add(i);
         }
-        System.out.println(myArrayList + "  " + myArrayList.size);
+        System.out.println(myArrayList + "  " + myArrayList.size());
 
         System.out.println(myArrayList.size());
 
@@ -86,9 +86,10 @@ class Main {
 
         myArrayList.remove(25);
 
-        myArrayList.remove(1);
+        myArrayList.remove(5);
         System.out.println(myArrayList + "  " + myArrayList.size);
         myArrayList.clear();
         System.out.println(myArrayList);
+        System.out.println(myArrayList + "  " + myArrayList.size);
     }
 }

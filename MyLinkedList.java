@@ -35,6 +35,7 @@ public class MyLinkedList<E> {
     }
 
     public int size() {
+
         return size;
     }
 
@@ -71,9 +72,9 @@ public class MyLinkedList<E> {
     }
 
     private static class Node<E> {
-        private E element;
         Node<E> next;
         Node<E> prev;
+        private E element;
 
         public Node(Node<E> prev, E element, Node<E> next) {
             this.element = element;
@@ -107,29 +108,34 @@ public class MyLinkedList<E> {
     }
 }
 
-
-class Mai {
+class TestMyLinkedList {
     public static void main(String[] args) {
         MyLinkedList<String> myLinkedList = new MyLinkedList<>();
-        System.out.println(myLinkedList);
-        myLinkedList.add("gggg");
-        myLinkedList.add("ggg");
-        myLinkedList.add("gg");
-        myLinkedList.add("g");
-        System.out.println(myLinkedList.size());
+        myLinkedList.add("Київ");
+        myLinkedList.add("Львів");
+        myLinkedList.add("Тернопіль");
+        myLinkedList.add("Одеса");
+        System.out.println("розмір створеного LinkedList - " + myLinkedList.size());
+
         myLinkedList.remove(1);
 
+        System.out.println("розмір LinkedList після видалення елементу - " + myLinkedList.size());
 
+        System.out.println("Отримуємо елементи");
         System.out.println(myLinkedList.get(0));
         System.out.println(myLinkedList.get(1));
         System.out.println(myLinkedList.get(2));
-        System.out.println(myLinkedList.get(10));
-        System.out.println(myLinkedList.get(-2));
+
+        System.out.println("Тест  - " + myLinkedList.get(10));
+        System.out.println("Тест  - " + myLinkedList.get(-2));
+
+        System.out.println("Видаляємо список, провіряєм розмір");
         myLinkedList.clear();
         System.out.println(myLinkedList.get(0));
         System.out.println(myLinkedList.size());
     }
 }
+
 
 
 

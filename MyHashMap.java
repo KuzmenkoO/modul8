@@ -53,8 +53,8 @@ public class MyHashMap<K, V> {
     public void remove(Object key) {
         for (int i = 0; i < table.length; i++) {
             if (table[i] != null && table[i].key.equals(key)) {
-                table[i]= table[i].getNextNode();
-                table[size]=null;
+                table[i] = table[i].getNextNode();
+                table[size] = null;
                 size--;
             }
         }
@@ -169,3 +169,29 @@ public class MyHashMap<K, V> {
     }
 }
 
+class TestMyHashMap {
+    public static void main(String[] args) {
+        MyHashMap<String, Integer> myHashMap = new MyHashMap<>();
+        myHashMap.put("Олександр", 9587);
+        myHashMap.put("Сергій", 5765);
+        myHashMap.put("Олександр", 2255);
+        myHashMap.put("Орест", 1111);
+        myHashMap.put("Анастасія", 1234);
+
+        System.out.println(myHashMap);
+
+        System.out.println(myHashMap.size());
+
+        System.out.println(myHashMap.get("Орест"));
+        System.out.println(myHashMap.get("Сергій"));
+        System.out.println(myHashMap);
+
+        myHashMap.remove("Орест");
+        System.out.println(myHashMap);
+
+        myHashMap.clear();
+        System.out.println(myHashMap.size());
+        System.out.println(myHashMap);
+
+    }
+}

@@ -64,7 +64,7 @@ class MyQueue<T> {
     }
 }
 
-class MyQueueTest {
+class TestMyQueue {
     public static void main(String[] args) {
         MyQueue<String> myQueue = new MyQueue<>();
         myQueue.add(1);
