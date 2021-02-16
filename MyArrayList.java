@@ -3,8 +3,8 @@ package homeWork8;
 import java.util.Arrays;
 
 class MyArrayList<T> {
-    public T[] elementData = (T[]) new Object[10];
-    public int size = 0;
+    private T[] elementData = (T[]) new Object[10];
+    private int size = 0;
 
     public void add(T value) {
         if (size < elementData.length) {
@@ -47,7 +47,7 @@ class MyArrayList<T> {
         if (index < 0 || index > size) {
             return null;
         }
-        return elementData[index - 1];
+        return elementData[index];
     }
 
     public void clear() {
@@ -77,6 +77,8 @@ class TestMyArrayList {
         for (int i = 11; i <= 15; i++) {
             myArrayList.add(i);
         }
+        System.out.println(myArrayList.get(0));
+        System.out.println(myArrayList.get(15));
         System.out.println(myArrayList + "  " + myArrayList.size());
 
         System.out.println(myArrayList.size());
@@ -87,9 +89,9 @@ class TestMyArrayList {
         myArrayList.remove(25);
 
         myArrayList.remove(5);
-        System.out.println(myArrayList + "  " + myArrayList.size);
+        System.out.println(myArrayList + "  " + myArrayList.size());
         myArrayList.clear();
         System.out.println(myArrayList);
-        System.out.println(myArrayList + "  " + myArrayList.size);
+        System.out.println(myArrayList + "  " + myArrayList.size());
     }
 }

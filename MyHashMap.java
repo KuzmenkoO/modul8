@@ -52,35 +52,25 @@ public class MyHashMap<K, V> {
 
     public void remove(Object key) {
         for (int i = 0; i < table.length; i++) {
-            if (table[i] != null && table[i].key.equals(key)) {
+            if (table[i] != null && (table[i].key == key || table[i].key.equals(key))) {
                 table[i] = table[i].getNextNode();
-                table[size] = null;
                 size--;
             }
         }
     }
 
+
     private void addNode(K key, V value, int hash, int index) {
         Node<K, V> newNode = new Node<>(hash, key, value, null);
-        Node<K, V> prevNode = table[index];
-        if (prevNode == null) {
+        if(table[index] == null){
             table[index] = newNode;
-        } else {
-            do {
-                if (prevNode.hash == hash && (prevNode.key == key || key.equals(prevNode.key))) {
-                    prevNode.value = value;
-                    return;
-                }
-                if (prevNode.getNextNode() != null) {
-                    prevNode = prevNode.getNextNode();
-                } else {
-                    break;
-                }
-
-            } while (prevNode != null);
-            newNode.setNextNode(prevNode);
+            size++;
+        }else if((table[index].getHash() == hash) && (key==table[index].getKey() || key.equals(table[index].getKey()))){
+        table[index].setValue(value);
+        }else {
+            table[index].nextNode = newNode;
+            size++;
         }
-        size++;
     }
 
     private void putForNullKey(V value) {
@@ -105,10 +95,10 @@ public class MyHashMap<K, V> {
     }
 
     private static class Node<K, V> {
-        int hash;
-        K key;
-        V value;
-        Node<K, V> nextNode;
+        private int hash;
+        private K key;
+        private V value;
+        private Node<K, V> nextNode;
 
         public Node(int hash, K key, V value, Node<K, V> nextNode) {
             this.hash = hash;
@@ -134,14 +124,16 @@ public class MyHashMap<K, V> {
         }
 
         public final String toString() {
-            return key + "=" + value;
+            return key + " = " + value;
         }
 
+        @Override
         public int hashCode() {
-            return Objects.hash(key, value);
+            return Objects.hash(key);
         }
 
-        public final boolean equals(Object o) {
+        @Override
+        public boolean equals(Object o) {
             if (o == this)
                 return true;
             if (o == null || getClass() != o.getClass()) {
@@ -171,27 +163,30 @@ public class MyHashMap<K, V> {
 
 class TestMyHashMap {
     public static void main(String[] args) {
-        MyHashMap<String, Integer> myHashMap = new MyHashMap<>();
-        myHashMap.put("Олександр", 9587);
-        myHashMap.put("Сергій", 5765);
-        myHashMap.put("Олександр", 2255);
-        myHashMap.put("Орест", 1111);
-        myHashMap.put("Анастасія", 1234);
+        MyHashMap<Integer, String> myHashMap = new MyHashMap<>();
+        myHashMap.put(1, "a");
+        myHashMap.put(2, "b");
+        myHashMap.put(3, "c");
+        myHashMap.put(2, "d");
+        myHashMap.put(3, "f");
+        myHashMap.put(4, "g");
+        myHashMap.put(5, "e");
 
         System.out.println(myHashMap);
+        System.out.println("розмір = " + myHashMap.size());
 
-        System.out.println(myHashMap.size());
+        System.out.println(myHashMap.get(3));
 
-        System.out.println(myHashMap.get("Орест"));
-        System.out.println(myHashMap.get("Сергій"));
+        myHashMap.remove(3);
         System.out.println(myHashMap);
+        System.out.println("розмір = " + myHashMap.size());
 
-        myHashMap.remove("Орест");
+        myHashMap.remove(1);
         System.out.println(myHashMap);
+        System.out.println("розмір = " + myHashMap.size());
 
         myHashMap.clear();
-        System.out.println(myHashMap.size());
-        System.out.println(myHashMap);
+        System.out.println(myHashMap   +  "розмір = " + myHashMap.size());
 
     }
 }
